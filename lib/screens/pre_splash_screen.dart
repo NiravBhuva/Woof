@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:woof_fini/screens/splash_screen.dart';
 
@@ -7,6 +9,14 @@ class PreSplashScreen extends StatefulWidget {
 }
 
 class _PreSplashScreenState extends State<PreSplashScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    startTimeout();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,5 +54,14 @@ class _PreSplashScreenState extends State<PreSplashScreen> {
         ],
       ),
     );
+  }
+
+  startTimeout(){
+    var _duration = new Duration(seconds: 2);
+    return new Timer(_duration, navigationPage);
+  }
+
+  void navigationPage(){
+    Navigator.of(context).pushReplacementNamed('/SplashScreen');
   }
 }

@@ -16,6 +16,8 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   RubberAnimationController _controller;
 
+  bool isShowComment = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -25,6 +27,27 @@ class _HomeScreenState extends State<HomeScreen>
         lowerBoundValue: AnimationControllerValue(pixel: 0),
         upperBoundValue: AnimationControllerValue(pixel: 450),
         duration: Duration(milliseconds: 200));
+
+    _controller.addListener((){
+      print(_controller.value);
+      if(_controller.value == 0){
+        setState(() {
+          isShowComment = false;
+        });
+      }else{
+        setState(() {
+          isShowComment = true;
+        });
+      }
+    });
+
+//    _controller.addStatusListener((status){
+//      if(status == AnimationStatus.dismissed){
+//        setState(() {
+//          isShowComment = false;
+//        });
+//      }
+//    });
     super.initState();
   }
 
@@ -32,6 +55,43 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: isShowComment ? Padding(
+        padding: MediaQuery.of(context).viewInsets,
+        child: Container(
+          height: 55,
+          color: Colors.white,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 10),
+                child: Icon(
+                  Icons.tag_faces,
+                  color: Color(0xff707070),
+                ),
+              ),
+              Flexible(
+                child: TextField(
+                  style: TextStyle(color: Color(0xff707070)),
+                  decoration: InputDecoration(
+                      hintText: 'Add a new comment',
+                      hintStyle: TextStyle(color: Color(0xff707070)),
+                      border: InputBorder.none
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10, right: 15),
+                child: Icon(
+                  Icons.send,
+                  color: Color(0xff707070),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ) : Container(height: 0),
       body: _body(),
     );
   }
@@ -311,9 +371,16 @@ class _HomeScreenState extends State<HomeScreen>
   void _expand() {
     _controller.launchTo(_controller.value, _controller.upperBound,
         velocity: 2);
+    setState(() {
+      isShowComment = true;
+    });
+
   }
 
   void _collapse() {
+    setState(() {
+      isShowComment = false;
+    });
     _controller.launchTo(_controller.value, _controller.lowerBound,
         velocity: 2);
   }
@@ -353,39 +420,6 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ),
           _commentRow(),
-          Container(
-            height: 55,
-            color: Colors.white,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(left: 15, right: 10),
-                  child: Icon(
-                    Icons.tag_faces,
-                    color: Color(0xff707070),
-                  ),
-                ),
-                Flexible(
-                  child: TextField(
-                    style: TextStyle(color: Color(0xff707070)),
-                    decoration: InputDecoration(
-                      hintText: 'Add a new comment',
-                      hintStyle: TextStyle(color: Color(0xff707070)),
-                      border: InputBorder.none
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 10, right: 15),
-                  child: Icon(
-                    Icons.send,
-                    color: Color(0xff707070),
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

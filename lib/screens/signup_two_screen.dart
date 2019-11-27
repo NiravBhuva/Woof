@@ -1,5 +1,11 @@
+import 'dart:core';
+import 'dart:core';
+
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:woof_fini/screens/welcome_screen.dart';
+
+import 'onboarding_1_screen.dart';
 
 class SignUpTwoScreen extends StatefulWidget {
   @override
@@ -13,11 +19,21 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
   int genderSelector;
   double slider = 4.5;
 
+  List<SignUpChip> chips = [];
+  int selected = 0;
+
   @override
   void initState() {
     // TODO: implement initState
     birthdayController.text = '09 May 2017';
     breedController.text = 'British Shorthair';
+
+    chips.add(SignUpChip('assets/dog.png', 'Dogs'));
+    chips.add(SignUpChip('assets/set_cat.png', 'Cats'));
+    chips.add(SignUpChip('assets/set_bird.png', 'Birds'));
+    chips.add(SignUpChip('assets/set_rabbit.png', 'Bunnies'));
+    chips.add(SignUpChip('assets/set_fish.png', 'Others'));
+
     super.initState();
   }
 
@@ -43,7 +59,8 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
           ListView(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 15),
+                margin:
+                    EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 15),
                 child: Row(
                   children: <Widget>[
                     GestureDetector(
@@ -67,73 +84,25 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
                   style: TextStyle(color: Colors.black, fontSize: 18),
                   decoration: InputDecoration(
                     labelText: 'Birtday',
-                    labelStyle: TextStyle(color: Color(0xff74d7df), fontSize: 15),
+                    labelStyle:
+                        TextStyle(color: Color(0xff74d7df), fontSize: 15),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff95989a), width: 1),
+                      borderSide:
+                          BorderSide(color: Color(0xff95989a), width: 1),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff95989a), width: 1),
+                      borderSide:
+                          BorderSide(color: Color(0xff95989a), width: 1),
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 40),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {},
-                      child: _type(
-                        'assets/dog.png',
-                        'Dogs',
-                        Color(0xff74d7df),
-                        true,
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    GestureDetector(
-                      onTap: () {},
-                      child: _type(
-                        'assets/set_cat.png',
-                        'Cats',
-                        Colors.white,
-                        false,
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    GestureDetector(
-                      onTap: () {},
-                      child: _type(
-                        'assets/set_bird.png',
-                        'Birds',
-                        Colors.white,
-                        false,
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    GestureDetector(
-                      onTap: () {},
-                      child: _type(
-                        'assets/set_rabbit.png',
-                        'Bunnies',
-                        Colors.white,
-                        false,
-                      ),
-                    ),
-                    SizedBox(width: 15),
-                    GestureDetector(
-                      onTap: () {},
-                      child: _type(
-                        'assets/set_fish.png',
-                        'Others',
-                        Colors.white,
-                        false,
-                      ),
-                    ),
-                  ],
-                ),
+                height: 85,
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(left: 15),
+                child: _allChips(),
               ),
               SizedBox(height: 15),
               Container(
@@ -144,12 +113,15 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
                   style: TextStyle(color: Colors.black, fontSize: 18),
                   decoration: InputDecoration(
                     labelText: 'Breed',
-                    labelStyle: TextStyle(color: Color(0xff74d7df), fontSize: 15),
+                    labelStyle:
+                        TextStyle(color: Color(0xff74d7df), fontSize: 15),
                     enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff95989a), width: 1),
+                      borderSide:
+                          BorderSide(color: Color(0xff95989a), width: 1),
                     ),
                     focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff95989a), width: 1),
+                      borderSide:
+                          BorderSide(color: Color(0xff95989a), width: 1),
                     ),
                   ),
                 ),
@@ -279,7 +251,7 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => WelcomeScreen()));
+                            builder: (context) => OnboardingOneScreen()));
                       },
                       child: Text(
                         'Continue',
@@ -293,7 +265,7 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => WelcomeScreen()));
+                            builder: (context) => OnboardingOneScreen()));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -327,7 +299,7 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: (){},
+                      onTap: () {},
                       child: Text(
                         'Term of Service & Privacy Policy',
                         textAlign: TextAlign.center,
@@ -348,31 +320,61 @@ class _SignUpTwoScreenState extends State<SignUpTwoScreen> {
     );
   }
 
-  Widget _type(String img, String name, Color color, bool selected) {
-    return Column(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            color: color,
+  _allChips() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: chips.length,
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.zero,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          margin: EdgeInsets.only(right: 10),
+          child: Column(
+            children: <Widget>[
+              ActionChip(
+                onPressed: () {
+                  setState(() {
+                    selected = index;
+                  });
+                },
+                padding: EdgeInsets.zero,
+                labelPadding: EdgeInsets.zero,
+                label: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: index == selected ? Color(0xff74d7df) : Colors.white,
+                  ),
+                  padding: EdgeInsets.all(5),
+                  height: 50,
+                  width: 50,
+                  child: Image.asset(
+                    chips[index].image,
+                    color:
+                    index == selected ? Colors.black : Color(0xff707070).withOpacity(0.3),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              AutoSizeText(
+                chips[index].name,
+                style: TextStyle(
+                  color: Color(0xff707070),
+                  fontSize: 16,
+                ),
+                maxLines: 1,
+                minFontSize: 8,
+              ),
+            ],
           ),
-          padding: EdgeInsets.all(5),
-          height: 50,
-          width: 50,
-          child: Image.asset(
-            img,
-            color: selected ? Colors.black : Color(0xff707070).withOpacity(0.3),
-          ),
-        ),
-        SizedBox(height: 5),
-        Text(
-          name,
-          style: TextStyle(
-            color: Color(0xff707070),
-            fontSize: 16,
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
+}
+
+class SignUpChip {
+  String image;
+  String name;
+
+  SignUpChip(this.image, this.name);
 }

@@ -190,11 +190,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       contentPadding: EdgeInsets.only(bottom: 20, top: 0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xff95989a), width: 5),
+                            BorderSide(color: Color(0xff95989a), width: 3),
                       ),
                       focusedBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: Color(0xff95989a), width: 5),
+                            BorderSide(color: Color(0xff95989a), width: 3),
                       ),
                     ),
                   ),

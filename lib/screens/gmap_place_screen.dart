@@ -21,6 +21,10 @@ class _GmapPlaceScreenState extends State<GmapPlaceScreen> {
     super.initState();
     data.add(Place('Tiendesitas', 'Mall', text, 'C-5 Las Fiestas, Pasig',
         'Open. Closes Midnight', '19-159-2993', 'www.grillzcafe.in'));
+    data.add(Place('Tiendesitas', 'Mall', text, 'C-5 Las Fiestas, Pasig',
+        'Open. Closes Midnight', '19-159-2993', 'www.grillzcafe.in'));
+    data.add(Place('Tiendesitas', 'Mall', text, 'C-5 Las Fiestas, Pasig',
+        'Open. Closes Midnight', '19-159-2993', 'www.grillzcafe.in'));
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,17 @@ class _DealsScreenState extends State<DealsScreen> {
   List<Events> topServices = new List<Events>();
   List<Events> bestDeals = new List<Events>();
   List<Events> recommendedFood = new List<Events>();
-  var currentPage = 0;
+
+  Timer timer;
+  PageController _controller = PageController(initialPage: 0, keepPage: false);
+  int count = 0;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    timer.cancel();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -67,6 +79,7 @@ class _DealsScreenState extends State<DealsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    startTimeout(4000);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -74,6 +87,7 @@ class _DealsScreenState extends State<DealsScreen> {
         backgroundColor: Colors.black,
         leading: GestureDetector(
           onTap: () {
+            timer.cancel();
             Navigator.of(context).pop();
           },
           child: Icon(Icons.arrow_back_ios),
@@ -128,7 +142,7 @@ class _DealsScreenState extends State<DealsScreen> {
               child: DotsIndicator(
                 dotsCount: pages.length,
                 axis: Axis.horizontal,
-                position: currentPage.toDouble(),
+                position: count.toDouble(),
                 decorator: DotsDecorator(
                   size: Size.square(5.0),
                   activeSize: Size(12.0, 5.0),
@@ -202,11 +216,12 @@ class _DealsScreenState extends State<DealsScreen> {
       height: 180,
       margin: EdgeInsets.only(left: 15),
       child: PageView.builder(
+        controller: _controller,
         scrollDirection: Axis.horizontal,
         itemCount: pages.length,
         onPageChanged: (index) {
           setState(() {
-            currentPage = index;
+            count = index;
           });
         },
         itemBuilder: (BuildContext context, int index) {
@@ -593,5 +608,25 @@ class _DealsScreenState extends State<DealsScreen> {
         },
       ),
     );
+  }
+
+  startTimeout([int milliseconds]) {
+    const timeout = const Duration(seconds: 3);
+    const ms = const Duration(milliseconds: 1);
+
+    var duration = milliseconds == null ? timeout : ms * milliseconds;
+    timer = new Timer(duration, handleTimeout);
+    return timer;
+  }
+
+  void handleTimeout() {
+    timer.cancel();
+    startTimeout(4000);
+    if (count == pages.length - 1) {
+      count = 0;
+    } else {
+      count++;
+    }
+    _controller.jumpToPage(count);
   }
 }

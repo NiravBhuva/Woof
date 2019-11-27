@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +18,10 @@ class _EventAndCompetitionState extends State<EventAndCompetition> {
     'assets/img_profile.jpg',
     'assets/img3.jpg',
   ];
+  Timer timer;
+  PageController _controller = PageController(initialPage: 0, keepPage: false);
+  int count = 0;
   List<String> forYou = [];
-  var currentPage = 0;
   List<Events> events = new List<Events>();
 
   @override
@@ -40,7 +44,15 @@ class _EventAndCompetitionState extends State<EventAndCompetition> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    startTimeout(4000);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -87,7 +99,7 @@ class _EventAndCompetitionState extends State<EventAndCompetition> {
               child: DotsIndicator(
                 dotsCount: pages.length,
                 axis: Axis.horizontal,
-                position: currentPage.toDouble(),
+                position: count.toDouble(),
                 decorator: DotsDecorator(
                   size: Size.square(5.0),
                   activeSize: Size(12.0, 5.0),
@@ -184,11 +196,12 @@ class _EventAndCompetitionState extends State<EventAndCompetition> {
       height: 180,
       margin: EdgeInsets.only(left: 15),
       child: PageView.builder(
+        controller: _controller,
         scrollDirection: Axis.horizontal,
         itemCount: pages.length,
         onPageChanged: (index) {
           setState(() {
-            currentPage = index;
+            count = index;
           });
         },
         itemBuilder: (BuildContext context, int index) {
@@ -325,6 +338,26 @@ class _EventAndCompetitionState extends State<EventAndCompetition> {
         },
       ),
     );
+  }
+
+  startTimeout([int milliseconds]) {
+    const timeout = const Duration(seconds: 3);
+    const ms = const Duration(milliseconds: 1);
+
+    var duration = milliseconds == null ? timeout : ms * milliseconds;
+    timer = new Timer(duration, handleTimeout);
+    return timer;
+  }
+
+  void handleTimeout() {
+    timer.cancel();
+    startTimeout(4000);
+    if (count == pages.length - 1) {
+      count = 0;
+    } else {
+      count++;
+    }
+    _controller.jumpToPage(count);
   }
 }
 

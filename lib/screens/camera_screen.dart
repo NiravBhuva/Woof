@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:woof_fini/screens/post_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -56,7 +57,9 @@ class _CameraScreenState extends State<CameraScreen> {
                       ),
                       SizedBox(width: 40),
                       GestureDetector(
-                        onTap: (){},
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PostScreen()));
+                        },
                         child: Container(
                           margin: EdgeInsets.only(top: 15),
                           height: 80,

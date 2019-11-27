@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:woof_fini/screens/change_password_screen.dart';
+import 'package:woof_fini/screens/signup_two_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -7,6 +9,21 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  List<SignUpChip> chips = [];
+  int selected = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    chips.add(SignUpChip('assets/dog.png', 'Dogs'));
+    chips.add(SignUpChip('assets/set_cat.png', 'Cats'));
+    chips.add(SignUpChip('assets/set_bird.png', 'Birds'));
+    chips.add(SignUpChip('assets/set_rabbit.png', 'Bunnies'));
+    chips.add(SignUpChip('assets/set_fish.png', 'Others'));
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,40 +139,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ), // Email
             SizedBox(height: 30),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {},
-                    child: _type('assets/dog.png', 'Dogs', Color(0xff393939)),
-                  ),
-                  SizedBox(width: 15),
-                  GestureDetector(
-                    onTap: () {},
-                    child:
-                        _type('assets/set_cat.png', 'Cats', Color(0xff74d7df)),
-                  ),
-                  SizedBox(width: 15),
-                  GestureDetector(
-                    onTap: () {},
-                    child: _type(
-                        'assets/set_bird.png', 'Birds', Color(0xff393939)),
-                  ),
-                  SizedBox(width: 15),
-                  GestureDetector(
-                    onTap: () {},
-                    child: _type(
-                        'assets/set_rabbit.png', 'Bunnies', Color(0xff393939)),
-                  ),
-                  SizedBox(width: 15),
-                  GestureDetector(
-                    onTap: () {},
-                    child: _type(
-                        'assets/set_fish.png', 'Others', Color(0xff393939)),
-                  ),
-                ],
-              ),
+              height: 85,
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(left: 15),
+              child: _allChips(),
             ),
             SizedBox(height: 30),
             FlatButton(
@@ -359,6 +346,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  _allChips() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: chips.length,
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.zero,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          margin: EdgeInsets.only(right: 10),
+          child: Column(
+            children: <Widget>[
+              ActionChip(
+                onPressed: () {
+                  setState(() {
+                    selected = index;
+                  });
+                },
+                padding: EdgeInsets.zero,
+                labelPadding: EdgeInsets.zero,
+                label: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    color: index == selected ? Color(0xff74d7df) : Color(0xff393939),
+                  ),
+                  padding: EdgeInsets.all(5),
+                  height: 50,
+                  width: 50,
+                  child: Image.asset(
+                    chips[index].image,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(height: 5),
+              AutoSizeText(
+                chips[index].name,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+                maxLines: 1,
+                minFontSize: 8,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
