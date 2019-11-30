@@ -16,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   //RubberAnimationController _controller;
+  PageController pageController = PageController();
 
   bool isShowComment = false;
 
@@ -41,6 +42,10 @@ class _HomeScreenState extends State<HomeScreen>
 //        });
 //      }
 //    });
+
+  pageController.addListener((){
+
+  });
     super.initState();
   }
 
@@ -94,6 +99,10 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  void sh(int){
+
+  }
+
   _newBody() {
     return Stack(
       children: <Widget>[
@@ -101,12 +110,10 @@ class _HomeScreenState extends State<HomeScreen>
           color: Colors.black,
           child: PageView.builder(
             key: UniqueKey(),
-            scrollDirection: Axis.horizontal,
-            onPageChanged: (int){
-              setState(() {
-                isShowComment = false;
-              });
+            scrollDirection: Axis.vertical,
+            onPageChanged: (int) {
             },
+            controller: pageController,
             physics: BouncingScrollPhysics(),
             itemCount: 10,
             itemBuilder: (context, position) {
