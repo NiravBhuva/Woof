@@ -31,7 +31,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  'Welcometo to',
+                  'Welcome to',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -50,8 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 SizedBox(height: 100),
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomeScreen()));
+                    Navigator.of(context).pushNamedAndRemoveUntil('/HomeScreen', (Route<dynamic> route) => false);
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -71,8 +70,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => HomeScreen()));
+                    Navigator.of(context).pushNamedAndRemoveUntil('/HomeScreen', (Route<dynamic> route) => false);
+
                   },
                   child: Text(
                     'Continue',

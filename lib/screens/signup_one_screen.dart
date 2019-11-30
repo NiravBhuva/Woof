@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:woof_fini/custom/country.dart';
+import 'package:woof_fini/custom/country_picker.dart';
 import 'package:woof_fini/screens/signup_two_screen.dart';
 
 class SignUpOneScreen extends StatefulWidget {
@@ -9,14 +11,18 @@ class SignUpOneScreen extends StatefulWidget {
 class _SignUpOneScreenState extends State<SignUpOneScreen> {
   TextEditingController nameController = new TextEditingController();
   TextEditingController emailController = new TextEditingController();
+  TextEditingController mobileController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController confirmPasswordController = new TextEditingController();
+
+  Country _selected;
 
   @override
   void initState() {
     // TODO: implement initState
     nameController.text = 'Bold Pilot';
     emailController.text = 'rocky.morissette@stephanie.biz';
+    mobileController.text = '9167890655';
     passwordController.text = '12345678';
     confirmPasswordController.text = '12345678';
     super.initState();
@@ -111,6 +117,37 @@ class _SignUpOneScreenState extends State<SignUpOneScreen> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 50),
                 child: TextField(
+                  controller: mobileController,
+                  textAlign: TextAlign.start,
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  decoration: InputDecoration(
+                    labelText: 'Phone Number',
+                    labelStyle: TextStyle(color: Color(0xff74d7df), fontSize: 15),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xff95989a), width: 1),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xff95989a), width: 1),
+                    ),
+                    prefix: CountryPicker(
+                      dense: false,
+                      showFlag: false,  //displays flag, true by default
+                      showDialingCode: true, //displays dialing code, false by default
+                      showName: false, //displays country name, true by default
+                      onChanged: (Country country) {
+                        setState(() {
+                          _selected = country;
+                        });
+                      },
+                      selectedCountry: _selected,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 50),
+                child: TextField(
                   controller: passwordController,
                   textAlign: TextAlign.start,
                   obscureText: true,
@@ -188,6 +225,7 @@ class _SignUpOneScreenState extends State<SignUpOneScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 40),
             ],
           ),
         ],

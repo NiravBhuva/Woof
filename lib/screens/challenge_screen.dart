@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:woof_fini/screens/leaderboard_screen.dart';
 
 class ChallengeScreen extends StatefulWidget {
   @override
@@ -41,7 +42,9 @@ class _ChallengeScreenState extends State<ChallengeScreen> {
         ),
         actions: <Widget>[
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => LeaderboardScreen()));
+            },
             child: Container(
               margin: EdgeInsets.only(right: 25),
               child: Image.asset(

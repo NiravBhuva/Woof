@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:woof_fini/screens/chat_screen.dart';
 
 class NotificationScreen extends StatefulWidget {
   @override
@@ -242,73 +243,78 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   _messages(String image, String name, String msg, String time) {
-    return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, bottom: 35),
-      child: Slidable(
-        actionPane: SlidableDrawerActionPane(),
-        actionExtentRatio: 0.25,
-        secondaryActions: <Widget>[
-          IconSlideAction(
-            color: Color(0xff393939),
-            iconWidget: Container(
-              height: 38,
-              width: 38,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(38)),
-                color: Colors.red,
-              ),
-              padding: EdgeInsets.all(9),
-              child: Image.asset('assets/delete.png'),
-            ),
-            onTap: () {},
-          ),
-        ],
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CircleAvatar(
-              radius: 31,
-              child: ClipOval(
-                child: Image.asset(
-                  image,
-                  height: 70,
-                  width: 70,
-                  fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatScreen()));
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: 20, right: 20, bottom: 35),
+        child: Slidable(
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          secondaryActions: <Widget>[
+            IconSlideAction(
+              color: Color(0xff393939),
+              iconWidget: Container(
+                height: 38,
+                width: 38,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(38)),
+                  color: Colors.red,
                 ),
+                padding: EdgeInsets.all(9),
+                child: Image.asset('assets/delete.png'),
               ),
-            ),
-            SizedBox(width: 20),
-            Expanded(
-              flex: 3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 7),
-                  Text(
-                    name,
-                    style: TextStyle(color: Colors.white, fontSize: 18),
-                  ),
-                  SizedBox(height: 7),
-                  Text(
-                    msg,
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              child: Container(
-                padding: EdgeInsets.only(left: 10, top: 5),
-                child: AutoSizeText(
-                  time,
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                  minFontSize: 5,
-                  maxLines: 1,
-                ),
-              ),
+              onTap: () {},
             ),
           ],
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              CircleAvatar(
+                radius: 31,
+                child: ClipOval(
+                  child: Image.asset(
+                    image,
+                    height: 70,
+                    width: 70,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SizedBox(width: 20),
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 7),
+                    Text(
+                      name,
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    SizedBox(height: 7),
+                    Text(
+                      msg,
+                      style: TextStyle(color: Colors.white, fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                child: Container(
+                  padding: EdgeInsets.only(left: 10, top: 5),
+                  child: AutoSizeText(
+                    time,
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    minFontSize: 5,
+                    maxLines: 1,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

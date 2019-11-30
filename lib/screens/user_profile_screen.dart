@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:woof_fini/screens/followers_screen.dart';
+import 'package:woof_fini/screens/following_screen.dart';
 import 'package:woof_fini/screens/settings_screen.dart';
+import 'package:woof_fini/screens/video_screen.dart';
 
 class UserProfileScreen extends StatefulWidget {
   @override
@@ -142,46 +145,56 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                     ],
                   ),
                   SizedBox(width: 25),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '45K',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        'Followers',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FollowersScreen()));
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '45K',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 2),
+                        Text(
+                          'Followers',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(width: 25),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '298',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 2),
-                      Text(
-                        'Following',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FollowingScreen()));
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          '298',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 2),
+                        Text(
+                          'Following',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -267,10 +280,16 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
         children: new List<Widget>.generate(
           posts.length,
           (index) {
-            return new Card(
-              child: Image.asset(
-                posts[index],
-                fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => VideoScreen()));
+              },
+              child: new Card(
+                child: Image.asset(
+                  posts[index],
+                  fit: BoxFit.cover,
+                ),
               ),
             );
           },
