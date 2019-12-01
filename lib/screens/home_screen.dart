@@ -43,9 +43,7 @@ class _HomeScreenState extends State<HomeScreen>
 //      }
 //    });
 
-  pageController.addListener((){
-
-  });
+    pageController.addListener(() {});
     super.initState();
   }
 
@@ -99,364 +97,380 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  void sh(int){
-
-  }
+  void sh(int) {}
 
   _newBody() {
-    return Stack(
-      children: <Widget>[
-        Container(
-          color: Colors.black,
-          child: PageView.builder(
-            key: UniqueKey(),
-            scrollDirection: Axis.vertical,
-            onPageChanged: (int) {
-            },
-            controller: pageController,
-            physics: BouncingScrollPhysics(),
-            itemCount: 10,
-            itemBuilder: (context, position) {
-              return Container(
-                color: Colors.black,
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      color: Colors.black,
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: Opacity(
-                        opacity: 0.85,
+    return GestureDetector(
+      onPanUpdate: (details) {
+        if (details.delta.dx > 0) {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => UserProfileScreen()));
+        } else {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => SearchScreen()));
+        }
+      },
+      child: Stack(
+        children: <Widget>[
+          Container(
+            color: Colors.black,
+            child: PageView.builder(
+              key: UniqueKey(),
+              scrollDirection: Axis.vertical,
+              onPageChanged: (int) {},
+              controller: pageController,
+              physics: BouncingScrollPhysics(),
+              itemCount: 10,
+              itemBuilder: (context, position) {
+                return Container(
+                  color: Colors.black,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        color: Colors.black,
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
+                        child: Opacity(
+                          opacity: 0.85,
+                          child: Image.asset(
+                            'assets/img2.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width,
                         child: Image.asset(
-                          'assets/img2.jpg',
+                          'assets/Shadow.png',
                           fit: BoxFit.cover,
                         ),
                       ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset(
-                        'assets/Shadow.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 40),
-                      child: Column(
-                        children: <Widget>[
-                          Spacer(),
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Column(
-                                  children: <Widget>[
-                                    Container(
-                                      height: 30,
-                                      child: Image.asset(
-                                        'assets/Path 2358.png',
-                                        fit: BoxFit.fitHeight,
-                                      ),
-                                    ),
-                                    Text(
-                                      '1234',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    SizedBox(height: 25),
-                                    GestureDetector(
-                                      onTap: _expand,
-                                      child: Container(
+                      Container(
+                        margin: EdgeInsets.only(top: 40),
+                        child: Column(
+                          children: <Widget>[
+                            Spacer(),
+                            Container(
+                              margin: EdgeInsets.only(right: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Container(
                                         height: 30,
                                         child: Image.asset(
-                                          'assets/Path 2357.png',
+                                          'assets/Path 2358.png',
                                           fit: BoxFit.fitHeight,
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      '134',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 11,
+                                      Text(
+                                        '1234',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 40),
-                                  ],
-                                ),
-                              ],
+                                      SizedBox(height: 25),
+                                      GestureDetector(
+                                        onTap: _expand,
+                                        child: Container(
+                                          height: 30,
+                                          child: Image.asset(
+                                            'assets/Path 2357.png',
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        '134',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                      SizedBox(height: 40),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10, right: 10),
-                            child: Column(
-                              children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    OtherProfileScreen()));
-                                      },
-                                      child: Row(
-                                        children: <Widget>[
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  width: 2.5,
-                                                  color: Colors.white),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(24)),
-                                            ),
-                                            child: CircleAvatar(
-                                              radius: 22,
-                                              backgroundColor: Colors.transparent,
-                                              child: ClipOval(
-                                                child: Image.asset(
-                                                    'assets/img6.jpg'),
+                            Container(
+                              margin: EdgeInsets.only(left: 10, right: 10),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      OtherProfileScreen()));
+                                        },
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 2.5,
+                                                    color: Colors.white),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(24)),
+                                              ),
+                                              child: CircleAvatar(
+                                                radius: 22,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                child: ClipOval(
+                                                  child: Image.asset(
+                                                      'assets/img6.jpg'),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          SizedBox(width: 7),
-                                          Text(
-                                            'SukiTheCat',
-                                            style: TextStyle(
+                                            SizedBox(width: 7),
+                                            Text(
+                                              'SukiTheCat',
+                                              style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 16),
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      FlatButton(
+                                        onPressed: () {
+                                          //Navigator.of(context).pop();
+                                        },
+                                        padding: EdgeInsets.zero,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
+                                            border: Border.all(
+                                              color: Colors.white,
+                                              width: 2,
+                                            ),
+                                          ),
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                                top: 5,
+                                                bottom: 5,
+                                                left: 10,
+                                                right: 10),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Image.asset(
+                                                  'assets/Group 2491.png',
+                                                  height: 12,
+                                                  width: 12,
+                                                  color: Colors.white,
+                                                ),
+                                                Image.asset(
+                                                  'assets/Group 2492.png',
+                                                  height: 16,
+                                                  width: 16,
+                                                  color: Colors.white,
+                                                ),
+                                                SizedBox(width: 5),
+                                                Text(
+                                                  'Follow',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    children: <Widget>[
+                                      Text(
+                                        '12K views',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Row(
+                                        children: <Widget>[
+                                          Container(
+                                            height: 12,
+                                            child: Image.asset(
+                                                'assets/Path 2359.png'),
+                                          ),
+                                          SizedBox(
+                                            width: 2,
+                                          ),
+                                          Text(
+                                            'Repost',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                            ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Spacer(),
-                                    FlatButton(
-                                      onPressed: () {
-                                        //Navigator.of(context).pop();
-                                      },
-                                      padding: EdgeInsets.zero,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                          border: Border.all(
-                                            color: Colors.white,
-                                            width: 2,
+                                      SizedBox(width: 10),
+                                      Row(
+                                        children: <Widget>[
+                                          Container(
+                                            height: 12,
+                                            child:
+                                                Image.asset('assets/Share.png'),
                                           ),
-                                        ),
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                              top: 5,
-                                              bottom: 5,
-                                              left: 10,
-                                              right: 10),
-                                          child: Row(
-                                            children: <Widget>[
-                                              Image.asset(
-                                                'assets/Group 2491.png',
-                                                height: 12,
-                                                width: 12,
-                                                color: Colors.white,
-                                              ),
-                                              Image.asset(
-                                                'assets/Group 2492.png',
-                                                height: 16,
-                                                width: 16,
-                                                color: Colors.white,
-                                              ),
-                                              SizedBox(width: 5),
-                                              Text(
-                                                'Follow',
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold),
-                                              ),
-                                            ],
+                                          SizedBox(width: 2),
+                                          Text(
+                                            'Share',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Row(
-                                  children: <Widget>[
-                                    Text(
-                                      '12K views',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Row(
-                                      children: <Widget>[
-                                        Container(
-                                          height: 12,
-                                          child:
-                                              Image.asset('assets/Path 2359.png'),
-                                        ),
-                                        SizedBox(
-                                          width: 2,
-                                        ),
-                                        Text(
-                                          'Repost',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(width: 10),
-                                    Row(
-                                      children: <Widget>[
-                                        Container(
-                                          height: 12,
-                                          child: Image.asset('assets/Share.png'),
-                                        ),
-                                        SizedBox(width: 2),
-                                        Text(
-                                          'Share',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showCupertinoModalPopup<void>(
-                                                context: context,
-                                                builder: (BuildContext context) {
-                                                  return CupertinoActionSheet(
-                                                    cancelButton:
-                                                        CupertinoActionSheetAction(
-                                                      isDestructiveAction: true,
-                                                      child: Text('Report/Block'),
-                                                      onPressed: () {},
-                                                    ),
-                                                    actions: <Widget>[
-                                                      CupertinoActionSheetAction(
-                                                        child: Text('Share'),
+                                          SizedBox(width: 10),
+                                          GestureDetector(
+                                            onTap: () {
+                                              showCupertinoModalPopup<void>(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return CupertinoActionSheet(
+                                                      cancelButton:
+                                                          CupertinoActionSheetAction(
+                                                        isDestructiveAction:
+                                                            true,
+                                                        child: Text(
+                                                            'Report/Block'),
                                                         onPressed: () {},
                                                       ),
-                                                      CupertinoActionSheetAction(
-                                                        child: Text('Cancel'),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                      ),
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                          child: Image.asset(
-                                            'assets/dots.png',
-                                            width: 25,
-                                            height: 25,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 15),
-                              ],
+                                                      actions: <Widget>[
+                                                        CupertinoActionSheetAction(
+                                                          child: Text('Share'),
+                                                          onPressed: () {},
+                                                        ),
+                                                        CupertinoActionSheetAction(
+                                                          child: Text('Cancel'),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
+                                            },
+                                            child: Image.asset(
+                                              'assets/dots.png',
+                                              width: 25,
+                                              height: 25,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 15),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 //                  RubberBottomSheet(
 //                    key: UniqueKey(),
 //                    lowerLayer: Container(),
 //                    upperLayer: _commentView(),
 //                    animationController: _controller,
 //                  ),
-                    _stopper(context),
-                  ],
-                ),
-              );
-            },
+                      _stopper(context),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 40),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left: 10),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => UserProfileScreen()));
-                  },
-                  child: CircleAvatar(
-                    radius: 18,
-                    backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                      child: Image.asset('assets/img8.jpeg'),
+          Container(
+            margin: EdgeInsets.only(top: 40),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => UserProfileScreen()));
+                    },
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.transparent,
+                      child: ClipOval(
+                        child: Image.asset('assets/img8.jpeg'),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 17),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SearchScreen()));
-                },
-                child: Container(
-                  height: 25,
-                  child: Image.asset('assets/Group 2490.png'),
-                ),
-              ),
-              SizedBox(width: 8),
-              Expanded(
-                child: GestureDetector(
+                SizedBox(width: 17),
+                GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => SearchScreen()));
                   },
-                  child: Text(
-                    'Explore',
-                    style: TextStyle(color: Colors.white, fontSize: 13),
+                  child: Container(
+                    height: 25,
+                    child: Image.asset('assets/Group 2490.png'),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => NotificationScreen()));
-                },
-                child: Container(
-                  height: 20,
-                  child: Image.asset('assets/Group 2489.png'),
+                SizedBox(width: 8),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => SearchScreen()));
+                    },
+                    child: Text(
+                      'Explore',
+                      style: TextStyle(color: Colors.white, fontSize: 13),
+                    ),
+                  ),
                 ),
-              ),
-              SizedBox(width: 15),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => CameraScreen()));
-                },
-                child: Container(
-                  height: 20,
-                  child: Image.asset('assets/Group 2488.png'),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => NotificationScreen()));
+                  },
+                  child: Container(
+                    height: 20,
+                    child: Image.asset('assets/Group 2489.png'),
+                  ),
                 ),
-              ),
-              SizedBox(width: 15),
-            ],
+                SizedBox(width: 15),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CameraScreen()));
+                  },
+                  child: Container(
+                    height: 20,
+                    child: Image.asset('assets/Group 2488.png'),
+                  ),
+                ),
+                SizedBox(width: 15),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -476,13 +490,13 @@ class _HomeScreenState extends State<HomeScreen>
 //        velocity: 2);
   }
 
-  _stopper(context){
+  _stopper(context) {
     return DraggableScrollableSheet(
       expand: true,
       initialChildSize: isShowComment ? 0.6 : 0.0,
       maxChildSize: 0.7,
       minChildSize: 0,
-      builder: (context, scrollController){
+      builder: (context, scrollController) {
         return _commentView();
       },
     );

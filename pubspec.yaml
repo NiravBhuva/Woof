@@ -55,6 +55,24 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
+  fonts:
+    - family: SofiaPro
+      fonts:
+        - asset: fonts/SofiaProRegular.ttf
+        - asset: fonts/SofiaProMedium.ttf
+        - asset: fonts/SofiaProSemiBold.ttf
+        - asset: fonts/SofiaProBold.ttf
+
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Medium.ttf
+        - asset: fonts/Montserrat-SemiBold.ttf
+        - asset: fonts/Montserrat-Bold.ttf
+
+    - family: JosefinSans
+      fonts:
+        - asset: fonts/JosefinSans-Bold.ttf
+        - asset: fonts/JosefinSans-SemiBold.ttf
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
