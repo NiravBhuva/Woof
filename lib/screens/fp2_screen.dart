@@ -86,7 +86,6 @@ class _FP2ScreenState extends State<FP2Screen> {
                   defaultBorderColor: Color(0xff74d7df),
                   hasTextBorderColor: Color(0xff74d7df),
                   pinBoxColor: Color(0xff74d7df),
-                  isCupertino: true,
                   pinBoxRadius: 10,
                   maxLength: pinLength,
                   hasError: hasError,
